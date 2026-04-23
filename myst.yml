@@ -54,7 +54,7 @@ site:
     - title: Projects
       children:
       - title: General Chemistry
-        url: /generalChemistry
+        url: https://openscienceteam.github.io/General-Chemistry/
   actions:
     - title: OpenScienceTeam
       url: https://github.com/OpenScienceTeam
