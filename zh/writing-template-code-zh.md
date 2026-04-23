@@ -319,7 +319,7 @@ except:
 from ase.io import read
 
 #Read structure from a local file, e.g. CIF\PDB
-mof_from_file = read("../data/MOF-5.pdb")
+mof_from_file = read("data/MOF-5.pdb")
 
 #View the periodic structure
 disp_mof=view(mof_from_file, viewer='x3d')

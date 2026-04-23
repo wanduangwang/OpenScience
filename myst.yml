@@ -2,9 +2,10 @@
 version: 1
 
 # metadata about the collection of files
+kernel: python3
 project:  # https://mystmd.org/guide/frontmatter
   id: 55e11f4a-76ea-4f9d-8c20-60c5b814d36a
-  title: Book Writing Template📖
+  title: Home
   description: OpenScience Writing Details
   keywords: []
   authors: [OpenScienceTeam]
@@ -13,6 +14,7 @@ project:  # https://mystmd.org/guide/frontmatter
   
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
+    - file: index.md
     - file: intro.md
     - title: English Content (EN)
       children:
@@ -36,13 +38,27 @@ project:  # https://mystmd.org/guide/frontmatter
 # template information about the website
 site:
   template: book-theme
-  title: Authoring Guide
+  title: Open Science
   options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
+    hide_toc: false  # Hide the table of contents in the sidebar
+    hide_outline: false  # Hide the outline (the floating table of contents)
+    logo_text: Open Science
+    logo: favicon.ico
+    style: ./css/footer.css
+    favicon: favicon.ico
+    # logo: ./images/brain.png
     baseUrl: https://openscienceteam.github.io/OpenScience/
-  nav: []
+  nav:
+    - title: Guide
+      url: /intro
+    - title: Projects
+      children:
+      - title: General Chemistry
+        url: https://openscienceteam.github.io/General-Chemistry/
   actions:
-    - title: Learn More
-      url: https://mystmd.org/guide
+    - title: OpenScienceTeam
+      url: https://github.com/OpenScienceTeam
+  parts:
+    footer: footer.md
+    primary_sidebar_footer: primary-sidebar-footer.md
   domains: []
