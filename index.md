@@ -40,33 +40,25 @@ Just contribute  - for SCIENCE
 :::
 
 ## Our projects
-:::::{grid} 1 2 3 3
+:::::{grid} 1 2 2 2
 ::::{card}
 :url: https://openscienceteam.github.io/General-Chemistry/
 :footer: General Chemistry
 
-:::{image} ./images/Fig2-10.jpg
+:::{image} ./images/General-Chemistry.png
 :height: 100px
 :::
 ::::
 
 ::::{card}
-:url: https://openscienceteam.github.io/General-Chemistry/
-:footer: General Chemistry
+:url: https://openscienceteam.github.io/aiforscience/
+:footer: Generative Models for Materials Science
 
-:::{image} ./images/Fig2-10.jpg
+:::{image} ./images/aiforscience.png
 :height: 100px
 :::
 ::::
 
-::::{card}
-:url: https://openscienceteam.github.io/General-Chemistry/
-:footer: General Chemistry
-
-:::{image} ./images/Fig2-10.jpg
-:height: 100px
-:::
-::::
 :::::
 
 

@@ -55,6 +55,8 @@ site:
       children:
       - title: General Chemistry
         url: https://openscienceteam.github.io/General-Chemistry/
+      - title: Generative Models for Materials Science
+        url: https://openscienceteam.github.io/aiforscience/
   actions:
     - title: OpenScienceTeam
       url: https://github.com/OpenScienceTeam
