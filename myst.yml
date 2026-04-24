@@ -15,8 +15,9 @@ project:  # https://mystmd.org/guide/frontmatter
   # To autogenerate a Table of Contents, run "myst init --write-toc"
   toc:
     - file: index.md
-    - file: intro.md
-    - title: English Content (EN)
+      hidden: false
+    - title: Writing Template - English Content (EN)
+      file: intro.md
       children:
       - file: en/writing-guide.md
       - file: en/ch1-mof-basics.md
@@ -24,16 +25,17 @@ project:  # https://mystmd.org/guide/frontmatter
       - file: en/writing-template-basic.md
       - file: en/writing-template-code.md
 
-
-    - file: intro-zh.md
-      hidden: true
-    - title: 中文内容 (ZH)
+    - title: 写作模板-中文内容 (ZH)
+      file: intro-zh.md
       children:
       - file: zh/writing-guide-zh.md
       - file: zh/writing-template-basic-zh.md
       - file: zh/writing-template-code-zh.md
       - file: zh/ch1-mof-basics-zh.md
       - file: zh/ch2-mof-advanced-zh.md
+
+    - file: about.md
+      hidden: true
 
 # template information about the website
 site:
@@ -57,6 +59,8 @@ site:
         url: https://openscienceteam.github.io/General-Chemistry/
       - title: Generative Models for Materials Science
         url: https://openscienceteam.github.io/aiforscience/
+    - title: About
+      url: /About
   actions:
     - title: OpenScienceTeam
       url: https://github.com/OpenScienceTeam

@@ -45,7 +45,7 @@ Just contribute  - for SCIENCE
 :url: https://openscienceteam.github.io/General-Chemistry/
 :footer: General Chemistry
 
-:::{image} ./images/General-Chemistry.png
+:::{image} ./images/books/General-Chemistry.png
 :height: 100px
 :::
 ::::
@@ -54,7 +54,7 @@ Just contribute  - for SCIENCE
 :url: https://openscienceteam.github.io/aiforscience/
 :footer: Generative Models for Materials Science
 
-:::{image} ./images/aiforscience.png
+:::{image} ./images/books/aiforscience.png
 :height: 100px
 :::
 ::::
@@ -68,28 +68,23 @@ Our Funders
 
 ::::{grid} 1 2 3 5
 
-:::{figure} ./images/sustech.png
+:::{figure} ./images/org/sustech.png
 :height: 100px
-Jupyter
 :::
-:::{figure} ./images/Berkeley.png
+:::{figure} ./images/org/Berkeley.png
 :height: 100px
-Jupyter
 :::
 
-:::{figure} ./images/Berkeley2.png
+:::{figure} ./images/org/Berkeley2.png
 :height: 100px
-Jupyter
 :::
 
-:::{figure} ./images/bids.png
+:::{figure} ./images/org/bids.png
 :height: 100px
-Jupyter
 :::
 
-:::{figure} ./images/jupyter.png
+:::{figure} ./images/org/jupyter.png
 :height: 100px
-Jupyter
 :::
 ::::
 

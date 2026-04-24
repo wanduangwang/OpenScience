@@ -194,12 +194,12 @@ Schematic diagram of MOF structure.
 
 ### 3.2 Web Images
 
-:::{figure} https://upload.wikimedia.org/wikipedia/commons/1/1d/MIL101_synthesis.png
+<!-- :::{figure} https://upload.wikimedia.org/wikipedia/commons/1/1d/MIL101_synthesis.png
 :name: Wiki-MOF
 :width: 60%
 :align: center
 Structure diagram of MIL-101 (Wikimedia).
-:::
+::: -->
 
 ---
 

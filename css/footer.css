@@ -74,3 +74,29 @@ body {
     font-weight: bold;
   }
 }
+
+.my-centered-block {
+  max-width: 640px;   /* 控制原本宽度 */
+  margin-left: auto;
+  margin-right: auto; /* 居中关键 */
+  text-align: center;
+}
+
+.image-grid {
+  max-width: 960px;   /* 控制原本宽度 */
+  margin-left: auto;
+  margin-right: auto; /* 居中关键 */
+  text-align: center;
+  
+  display: flex;
+  flex-wrap: wrap;      /* 超出自动换行 */
+  gap: 8px;             /* 图片间距，可调 */
+
+  justify-content: center;
+}
+
+.image-grid img {
+  height: 100px;        /* 统一高度 */
+  width: auto;          /* 等比例缩放 */
+  object-fit: contain;  /* 保持比例（保险） */
+}

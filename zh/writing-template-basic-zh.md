@@ -209,12 +209,12 @@ MOF 结构示意图。
 
 ### 3.2 网络图片
 
-:::{figure} https://upload.wikimedia.org/wikipedia/commons/1/1d/MIL101_synthesis.png
+<!-- :::{figure} https://upload.wikimedia.org/wikipedia/commons/1/1d/MIL101_synthesis.png
 :name: Wiki-MOF-zh
 :width: 60%
 :align: center
 MIL-101 的结构示意图（Wikimedia）。
-:::
+::: -->
 
 ---
 
