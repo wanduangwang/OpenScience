@@ -80,6 +80,21 @@ Benkai Li
 ### Scientific Advisory Board
 
 ### Tech Board
+::::{grid} 4
+
+:::{figure} ./images/team/BoyuQie.png
+:height: 150px
+Boyu Qie \
+Chemistry/Physics/AI \
+UC Berkeley
+:::
+
+:::{figure} ./images/team/BenkaiLi.webp
+:height: 150px
+Benkai Li
+:::
+
+::::
 
 ### Supporting/Collaborating Organizations
 

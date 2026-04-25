@@ -87,16 +87,31 @@ body {
   margin-left: auto;
   margin-right: auto; /* 居中关键 */
   text-align: center;
-  
-  display: flex;
-  flex-wrap: wrap;      /* 超出自动换行 */
-  gap: 8px;             /* 图片间距，可调 */
 
+  display: flex;
+  flex-wrap: wrap; /* 超出自动换行 */
+  gap: 0.75rem 1.25rem;
   justify-content: center;
+  align-items: center; /* 垂直居中对齐不同比例的徽标 */
 }
 
+/* 徽标长宽比差异大：只固定「外框」的最大宽高，由图片固有比例在框内自适应 */
+.image-grid figure,
+.image-grid .figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  flex: 0 1 auto;
+}
+
+.image-grid figure img,
 .image-grid img {
-  height: 100px;        /* 统一高度 */
-  width: auto;          /* 等比例缩放 */
-  object-fit: contain;  /* 保持比例（保险） */
+  display: block;
+  max-height: 4.5rem; /* 约 72px，限制偏高徽标 */
+  max-width: 10.5rem; /* 限制过宽字标，按宽高比自适配另一维 */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
 }
