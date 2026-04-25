@@ -7,7 +7,7 @@ site:
 ---
 
 
-+++ { "kind": "split-image", "class": "hero-split" }
++++ { "kind": "split-image", "class": "home-hero" }
 
 ## Welcome to Open Science
 
@@ -21,45 +21,40 @@ An open-source knowledge database, interactive, neural network formation, with A
 
 +++ {"kind": "centered", "class": "col-body"}
 
-Open knowledge for the AI era
-
 ## About Open Science
 
-Open Science is a community-built knowledge platform for learning, teaching, and exploring science without borders. We turn expert-edited STEM content into connected, multilingual, and interactive learning paths that anyone can use, extend, and improve.
+::::{grid} 1 2
 
-Start with one topic, such as MOFs, and follow the links outward: organic chemistry, characterization, machine learning, visualization, notebooks, datasets, and frontier research updates. Built with open-source tools from the Jupyter ecosystem, this project is designed to be readable by humans, executable by learners, and useful alongside modern AI systems.
+We are building an open-science knowledge initiative at UC Berkeley BIDMaP. Our vision is a multilingual open knowledge infrastructure for STEM learning in the AI and LLM era. We aim to make scientific knowledge high-quality, authoritative, expert-edited, and freely accessible. This resource will be continuously updated for students, educators, and researchers worldwide. It is designed to benefit anyone, regardless of geography or educational resources. Using MOFs as an example, a learner will not only see individual topics but can also navigate across linked concepts. These include organic chemistry, characterization methods, and machine learning. Built on open-source tools from the Jupyter community, the platform offers textbook-style organization with interactive code, visualizations, downloadable notebooks, and LLM-based content support. It checks content accuracy, organizes frontier updates, and guides interpretation.
 
-![earth](./images/earth.png)
-
-:::{important} What we stand for
-
-::::{grid} 1 1 2 3
-:gutter: 2
-:class-container: pb-3
-
-:::{card} 🔓 Free access
-No paywalls, no fees, no artificial barriers.
+:::{figure} ./images/earth.png
+:align: center
 :::
 
-:::{card} 🌍 Global participation
-No geographic gatekeeping, no geopolitical ownership of knowledge.
-:::
-
-:::{card} 🤝 Community standards
-Open-source workflows, transparent review, and expert stewardship.
-:::
-
-:::{card} 🌐 Multilingual learning
-Science should be understandable across languages and backgrounds.
-:::
-
-:::{card} 🤖 AI-assisted, human-checked
-Faster updates without giving up accuracy.
-:::
 ::::
 
-**Contribute for science. Build with the world.**
+### Our Goals
+
+Open Science is a public knowledge commons for the AI era: free to access, easy to improve, and built for learners everywhere.
+
+::::{grid} 1 2 3 3
+:class: home-goals-grid
+
+:::{card} Open by Default
+No paywalls, no fees, and no artificial barriers to scientific knowledge.
 :::
+
+:::{card} Built by Community
+Transparent, open-source collaboration with expert review at the center.
+:::
+
+:::{card} Global and Multilingual
+Resources designed for students, educators, and researchers across languages and regions.
+:::
+
+::::
+
+Contribute knowledge, tools, and review. Build for science.
 
 +++
 
