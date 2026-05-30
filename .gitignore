@@ -1,3 +1,43 @@
-# MyST build outputs
-_build
+# MyST build outputs (per-language, in content/<lang>/)
+content/*/_build/
+
+# MyST precompiled content (copied from content/<lang>/_build/html/)
+public/myst-content/
+
+# MyST site output (legacy)
+site/
+_build/
+
+# Vite / React build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp
+.vite-temp/
 .ipynb_checkpoints

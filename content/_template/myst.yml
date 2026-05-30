@@ -1,0 +1,32 @@
+# Template: Copy this directory and rename for a new language
+# 1. cp -r _template <lang-code>  (e.g., _template fr)
+# 2. Update title and toc below
+# 3. Add your .md files
+# 4. Build: cd content/<lang-code> && BASE_URL=/OpenScience/myst-content/<lang-code> npx mystmd build --html
+version: 1
+project:
+  title: Open Science
+  description: OpenScience Writing Details
+  keywords: []
+  authors: [OpenScienceTeam]
+  toc:
+    - file: intro.md
+    # Add your TOC entries here
+
+site:
+  template: article-theme
+  title: Open Science
+  options:
+    hide_toc: false
+    hide_outline: false
+    hide_footer_links: true
+    logo_text: Open Science
+    logo: ../../favicon.ico
+    style: ../../css/footer.css
+    favicon: ../../favicon.ico
+  nav:
+    - title: Guide
+      url: /intro
+  parts:
+    footer: ../../footer.md
+    primary_sidebar_footer: ../../primary-sidebar-footer.md

@@ -1,0 +1,40 @@
+{
+  "name": "openscience",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "myst:build": "node scripts/build-myst.mjs",
+    "myst:copy": "node scripts/copy-myst.mjs",
+    "prebuild": "npm run myst:copy",
+    "build": "tsc -b && npm run prebuild && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "i18next": "^24.2.3",
+    "i18next-browser-languagedetector": "^8.0.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-i18next": "^15.4.1",
+    "react-markdown": "^10.1.0",
+    "react-router": "^7.5.0",
+    "react-router-dom": "^7.5.0",
+    "rehype-katex": "^7.0.1",
+    "remark-directive": "^3.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.1",
+    "zustand": "^5.0.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "mystmd": "^1.9.1",
+    "tailwindcss": "^4.1.4",
+    "typescript": "~5.7.3",
+    "vite": "^6.3.2"
+  }
+}

@@ -11,6 +11,22 @@ body {
   flex-direction: column;
 }
 
+/* 隐藏顶部导航栏 */
+.bd-header,
+.myst-article-header,
+.items-center,
+.myst-supporting-documents,
+.gap-2,
+.navbar.header,
+header.bd-header {
+  display: none !important;
+}
+
+/* 同时把 body 的顶部 padding 清掉，避免留一块空白 */
+body {
+  padding-top: 0 !important;
+}
+
 .article.content {
   /* Override 100vh from myst-theme:styles/typography.css so content div
    * doesn't push the footer offscreen.
@@ -51,7 +67,7 @@ body {
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 800px) {
     & .outer-grid {
       grid-template-columns: 1fr;
       justify-items: start;
@@ -76,7 +92,7 @@ body {
 }
 
 .my-centered-block {
-  max-width: 640px;   /* 控制原本宽度 */
+  max-width: 800px;   /* 控制原本宽度 */
   margin-left: auto;
   margin-right: auto; /* 居中关键 */
   text-align: center;
@@ -116,7 +132,7 @@ body {
 }
 
 .image-grid {
-  max-width: 960px;   /* 控制原本宽度 */
+  max-width: 1200px;   /* 控制原本宽度 */
   margin-left: auto;
   margin-right: auto; /* 居中关键 */
   text-align: center;

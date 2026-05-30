@@ -1,0 +1,34 @@
+version: 1
+project:
+  title: Open Science
+  description: OpenScience Writing Details - English
+  keywords: []
+  authors: [OpenScienceTeam]
+  toc:
+    - file: intro.md
+    - title: Writing Template - English Content (EN)
+      file: intro.md
+      children:
+      - file: writing-guide.md
+      - file: ch1-mof-basics.md
+      - file: ch2-mof-advanced.md
+      - file: writing-template-basic.md
+      - file: writing-template-code.md
+
+site:
+  template: article-theme
+  title: Open Science
+  options:
+    hide_toc: true
+    hide_outline: false
+    hide_footer_links: true
+    logo_text: Open Science
+    logo: ../../favicon.ico
+    style: ../../css/footer.css
+    favicon: ../../favicon.ico
+  nav:
+    - title: Guide
+      url: /intro
+  parts:
+    footer: ../../footer.md
+    primary_sidebar_footer: ../../primary-sidebar-footer.md
