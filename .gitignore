@@ -1,4 +1,61 @@
-# MyST build outputs
-_build
-.ipynb_checkpoints
-frontend
+# Dependencies
+node_modules/
+.pnpm-store/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Build outputs
+site/out/
+site/.next/
+guide/_build/
+guide/**/_build_old/
+# merged MyST build output (3900+ generated files)
+site/public/guide/
+
+# Test coverage
+/coverage
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs & debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.pem
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# WorkBuddy
+.workbuddy/
+
+# Temp
+tmp/
+temp/
+.cache/

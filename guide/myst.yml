@@ -49,10 +49,10 @@ site:
     style: ./css/footer.css
     favicon: favicon.ico
     # logo: ./images/brain.png
-    baseUrl: https://openscienceteam.github.io/OpenScience/
+    baseUrl: /guide
   nav:
     - title: Guide
-      url: /intro
+      url: /guide/intro
     - title: Projects
       children:
       - title: General Chemistry
@@ -69,6 +69,6 @@ site:
     - title: OpenScienceTeam
       url: https://github.com/OpenScienceTeam
   parts:
-    footer: footer.md
+    footer: shared-footer.html
     primary_sidebar_footer: primary-sidebar-footer.md
   domains: []

@@ -1,0 +1,19 @@
+{
+  "name": "openscience",
+  "private": true,
+  "scripts": {
+    "setup": "cd site && npm install",
+    "merge": "node scripts/merge-builds.js",
+    "build:guide:en": "cd guide/en && myst build --html",
+    "build:guide:zh": "cd guide/zh && myst build --html",
+    "build:guide": "npm run build:guide:en && npm run build:guide:zh",
+    "dev:next": "cd site && npm run dev",
+    "dev": "npm run build:guide && npm run merge && npm run dev:next",
+    "build:site": "cd site && npm run build",
+    "build": "npm run build:guide && npm run merge && npm run build:site",
+    "preview": "npm run build && npx serve site/out"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

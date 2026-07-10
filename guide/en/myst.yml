@@ -1,0 +1,37 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+
+kernel: python3
+project:
+  id: en-book-0000-0000-000000000001
+  title: Open Science - Guide (EN)
+  description: OpenScience Writing Guide - English
+  authors: [OpenScienceTeam]
+  toc:
+    - file: index.md
+    - title: Writing Templates
+      file: intro-en.md
+      children:
+      - file: writing-guide-en.md
+      - file: ch1-mof-basics-en.md
+      - file: ch2-mof-advanced-en.md
+      - file: writing-template-basic-en.md
+      - file: writing-template-code-en.md
+
+site:
+  template: book-theme
+  title: Open Science
+  options:
+    hide_toc: false
+    hide_outline: false
+    logo_text: Open Science
+    logo_url: /
+    logo: ../favicon.ico
+    style: ../css/footer.css
+    favicon: ../favicon.ico
+  nav: []
+  actions: []
+  parts:
+    footer: ../shared-footer-en.md
+    primary_sidebar_footer: ../primary-sidebar-footer.md
+  domains: []

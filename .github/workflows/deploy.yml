@@ -1,0 +1,70 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+# ── 触发方式 ──────────────────────────────────────────
+#   1) 自动：推送（commit/push）到 hybrid-refactor 分支即自动部署
+#   2) 手动：在仓库 Actions 面板点 "Run workflow" 随时手动触发
+on:
+  push:
+    branches: [hybrid-refactor]   # 若要改走 main，把这里换成 main
+  workflow_dispatch:              # 手动触发开关
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许一个并发部署；不取消进行中的部署（避免半成品上线）
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22          # 匹配本地；满足 engines >=20（旧流程的 18.x 会跑挂 Next 16）
+          cache: npm                # 缓存 npm 依赖，加速构建
+
+      - name: Install MyST
+        run: npm install -g mystmd@1.10.1   # 锁版本，防 mystmd 升级漂移导致输出结构变化
+
+      # Step 1+2: 构建两本 MyST 书（必须带 BASE_URL）
+      - name: Build MyST EN
+        working-directory: ./guide/en
+        run: BASE_URL=/guide/en myst build --html
+      - name: Build MyST ZH
+        working-directory: ./guide/zh
+        run: BASE_URL=/guide/zh myst build --html
+
+      # Step 3: 合并到 site/public（含共享资产落地到 public 根 + Guide 链接尾斜杠）
+      - name: Merge builds
+        run: node scripts/merge-builds.js
+
+      # Step 4: 静态导出 Next.js
+      - name: Build Next.js (static export)
+        working-directory: ./site
+        run: |
+          npm ci
+          npm run build            # 产出 site/out/
+
+      # Step 5: 关键——禁用 Jekyll，保住 _next/ 与 _assets/
+      - name: Add .nojekyll
+        run: touch site/out/.nojekyll
+
+      # Step 6: 上传并部署
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './site/out'
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

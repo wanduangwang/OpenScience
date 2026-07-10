@@ -1,0 +1,45 @@
+/* OpenScience Design Tokens
+   Shared between MyST (guide/) and Next.js (site/)
+   Brand: #013243 dark teal
+   ============================== */
+
+:root {
+  /* Brand */
+  --os-color-brand: #013243;
+  --os-color-brand-light: #1a5063;
+  --os-color-brand-dark: #002030;
+  --os-color-accent: #1a73e8;
+
+  /* Text */
+  --os-color-text: #1a1a1a;
+  --os-color-text-muted: #5f5e5a;
+  --os-color-text-inverse: #ffffff;
+
+  /* Backgrounds */
+  --os-color-bg: #ffffff;
+  --os-color-bg-secondary: #f8f9fa;
+  --os-color-bg-dark: #013243;
+  --os-color-bg-card: #ffffff;
+
+  /* Typography */
+  --os-font-sans: 'Inter', system-ui, sans-serif;
+  --os-font-serif: 'Source Serif 4', Georgia, serif;
+  --os-font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --os-space-unit: 4px;
+  --os-space-xs: calc(var(--os-space-unit) * 1);
+  --os-space-sm: calc(var(--os-space-unit) * 2);
+  --os-space-md: calc(var(--os-space-unit) * 4);
+  --os-space-lg: calc(var(--os-space-unit) * 6);
+  --os-space-xl: calc(var(--os-space-unit) * 10);
+
+  /* Border Radius */
+  --os-radius-sm: 4px;
+  --os-radius-md: 8px;
+  --os-radius-lg: 12px;
+
+  /* Shadows */
+  --os-shadow-card: 0 0.75rem 2rem rgba(1, 50, 67, 0.08);
+  --os-shadow-sm: 0 1px 2px rgba(1, 50, 67, 0.06);
+}

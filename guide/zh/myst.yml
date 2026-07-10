@@ -1,0 +1,37 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+
+kernel: python3
+project:
+  id: zh-book-0000-0000-000000000002
+  title: Open Science - Guide (ZH)
+  description: OpenScience 编写指南 - 中文
+  authors: [OpenScienceTeam]
+  toc:
+    - file: index.md
+    - title: 写作模板
+      file: intro-zh.md
+      children:
+      - file: writing-guide-zh.md
+      - file: writing-template-basic-zh.md
+      - file: writing-template-code-zh.md
+      - file: ch1-mof-basics-zh.md
+      - file: ch2-mof-advanced-zh.md
+
+site:
+  template: book-theme
+  title: Open Science
+  options:
+    hide_toc: false
+    hide_outline: false
+    logo_text: Open Science
+    logo_url: /
+    logo: ../favicon.ico
+    style: ../css/footer.css
+    favicon: ../favicon.ico
+  nav: []
+  actions: []
+  parts:
+    footer: ../shared-footer-zh.md
+    primary_sidebar_footer: ../primary-sidebar-footer.md
+  domains: []
