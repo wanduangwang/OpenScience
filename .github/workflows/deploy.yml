@@ -46,13 +46,18 @@ jobs:
         working-directory: ./guide/zh
         run: BASE_URL=/guide/zh myst build --html
 
-      # Step 3: 合并到 site/public（含共享资产落地到 public 根 + Guide 链接尾斜杠）
+      # Step 3: 合并到 site/public，并给 MyST 静态 HTML 的 Guide 链接/资产
+      # 补 /OpenScience 前缀（GitHub Pages 项目子路径必需；仅 CI 开启）
       - name: Merge builds
-        run: node scripts/merge-builds.js
+        run: ADD_BASE_PATH=1 node scripts/merge-builds.js
 
       # Step 4: 静态导出 Next.js
+      #   NEXT_PUBLIC_BASE_PATH 必须与 next.config basePath 一致（仅生产生效），
+      #   用于让 about 页等 Next 组件里的硬编码 /guide/images 资源也带上前缀。
       - name: Build Next.js (static export)
         working-directory: ./site
+        env:
+          NEXT_PUBLIC_BASE_PATH: /OpenScience
         run: |
           npm ci
           npm run build            # 产出 site/out/

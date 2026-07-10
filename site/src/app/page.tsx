@@ -1,11 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { useLocale } from '@/lib/i18n/locale-context';
 
 export default function HomePage() {
   const { t, locale } = useLocale();
-  const guideHref = locale === 'en' ? '/guide/en/intro-en' : '/guide/zh/intro-zh';
+  // Mirrors next.config basePath (set only in production/deploy). Empty in dev.
+  // Use a plain <a> with the explicit prefix: <Link> inside a client component
+  // can render a raw (un-prefixed) href in the static HTML on GitHub Pages'
+  // /OpenScience/ subpath, breaking navigation. A plain anchor navigates fully.
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const guideHref = basePath + (locale === 'en' ? '/guide/en/intro-en/' : '/guide/zh/intro-zh/');
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
@@ -17,13 +21,13 @@ export default function HomePage() {
         <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
           {t('home.hero.subtitle')}
         </p>
-        <Link
+        <a
           href={guideHref}
           className="inline-block rounded-lg px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
           style={{ backgroundColor: '#013243' }}
         >
           {t('home.hero.cta')}
-        </Link>
+        </a>
       </section>
 
       {/* About */}

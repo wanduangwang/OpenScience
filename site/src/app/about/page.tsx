@@ -2,6 +2,9 @@
 
 import { useLocale } from '@/lib/i18n/locale-context';
 
+// Mirrors next.config basePath (set only in production/deploy). Empty in dev.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 const team = [
   { name: 'Boyu Qie', role: 'Chemistry/Physics/AI', org: 'UC Berkeley', img: '/guide/images/team/BoyuQie.png' },
   { name: 'Nakul Rampal', role: 'Chemistry/AI', org: 'UC Berkeley', img: '/guide/images/team/NakulRampal.png' },
@@ -36,7 +39,7 @@ export default function AboutPage() {
             <div key={member.name} className="flex flex-col items-center">
               <div className="mb-3 h-36 w-36 overflow-hidden rounded-full bg-gray-100">
                 <img
-                  src={member.img}
+                  src={`${basePath}${member.img}`}
                   alt={member.name}
                   className="h-full w-full object-cover"
                   loading="lazy"
@@ -61,7 +64,7 @@ export default function AboutPage() {
           {orgs.map((org) => (
             <div key={org.name} className="flex items-center justify-center">
               <img
-                src={org.img}
+                src={`${basePath}${org.img}`}
                 alt={org.name}
                 className="max-h-[4.5rem] max-w-[10.5rem] object-contain"
                 loading="lazy"

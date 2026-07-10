@@ -6,6 +6,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// GitHub Pages serves this project at /OpenScience/. MyST books are built with
+// BASE_URL=/guide/en (no repo prefix) so local dev previews work at the root.
+// At deploy time we prepend /OpenScience to every Guide link/asset in the
+// generated HTML. ADD_BASE_PATH=1 is set only in deploy.yml (CI), never in dev.
+const BASE = process.env.ADD_BASE_PATH ? '/OpenScience' : '';
+
 const GUIDE_DIR = path.join(__dirname, '..', 'guide');
 const SITE_PUBLIC_GUIDE = path.join(__dirname, '..', 'site', 'public', 'guide');
 
@@ -110,8 +116,7 @@ function removeProjectTocEntry() {
   }
 
   console.log('  ~ Removing project title from TOC...');
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'en'));
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'zh'));
+  walkDir(SITE_PUBLIC_GUIDE);
 }
 
 function suppressHydrationErrors() {
@@ -155,8 +160,7 @@ function suppressHydrationErrors() {
   }
 
   console.log('  ~ Suppressing hydration errors...');
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'en'));
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'zh'));
+  walkDir(SITE_PUBLIC_GUIDE);
 }
 
 function injectFloatPanel() {
@@ -172,8 +176,8 @@ function injectFloatPanel() {
       + '<span style="opacity:0.6;font-size:0.65rem;line-height:1;">&#x25B4;</span>'
       + '<div class="os-float-body" style="position:absolute;bottom:100%;right:0;margin-bottom:0.625rem;opacity:0;visibility:hidden;transform:translateY(6px) scale(0.96);transition:opacity 0.15s ease,visibility 0.15s ease,transform 0.15s ease;transform-origin:bottom right;">'
       + '<div style="min-width:9rem;background:white;border:1px solid #e5e7eb;border-radius:0.75rem;padding:0.375rem;box-shadow:0 4px 16px rgba(0,0,0,0.12);">'
-      + '<a href="/guide/en/intro-en" class="os-float-item' + activeEn + '" style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:0.5rem;color:#374151!important;text-decoration:none;font-size:0.875rem;">EN' + (checkEn ? ' <span style="opacity:0.5;font-size:0.75rem;">&#x2713;</span>' : '') + '</a>'
-      + '<a href="/guide/zh/intro-zh" class="os-float-item' + activeZh + '" style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:0.5rem;color:#374151!important;text-decoration:none;font-size:0.875rem;">中文' + (checkZh ? ' <span style="opacity:0.5;font-size:0.75rem;">&#x2713;</span>' : '') + '</a>'
+      + '<a href="' + BASE + '/guide/en/intro-en/" class="os-float-item' + activeEn + '" style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:0.5rem;color:#374151!important;text-decoration:none;font-size:0.875rem;">EN' + (checkEn ? ' <span style="opacity:0.5;font-size:0.75rem;">&#x2713;</span>' : '') + '</a>'
+      + '<a href="' + BASE + '/guide/zh/intro-zh/" class="os-float-item' + activeZh + '" style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:0.5rem;color:#374151!important;text-decoration:none;font-size:0.875rem;">中文' + (checkZh ? ' <span style="opacity:0.5;font-size:0.75rem;">&#x2713;</span>' : '') + '</a>'
       + '<div style="height:1px;background:#e5e7eb;margin:0.25rem 0.5rem;"></div>'
       + '<button id="os-chat-btn" style="display:flex;align-items:center;gap:0.5rem;width:100%;padding:0.5rem 0.75rem;border-radius:0.5rem;border:none;background:transparent;color:#374151!important;font-size:0.875rem;cursor:pointer;text-align:left;transition:background 0.1s;">'
       + '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:1rem;height:1rem;color:#2563eb;flex-shrink:0;"><path d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z"/><path d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.782a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z"/></svg>'
@@ -307,8 +311,7 @@ function injectFloatPanel() {
   }
 
   console.log('  ~ Injecting floating panel...');
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'en'));
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'zh'));
+  walkDir(SITE_PUBLIC_GUIDE);
   console.log('  ✓ Floating panel injected');
 }
 
@@ -334,9 +337,10 @@ function fixTrailingSlashes() {
       if (content.indexOf('__remixContext') === -1) return; // Not a MyST page
 
       // Fix __remixContext "url":"/guide/en/intro-en" → "/guide/en/intro-en/"
-      // Match: "url":"/guide/en/...<alphanumeric-or-hyphen>" not ending with /
+      // Also handles the root book's "/guide/intro" → "/guide/intro/".
+      // Match: "url":"/guide/(<lang>/)?<slug>" not ending with /
       content = content.replace(
-        /("url":"\/guide\/(en|zh)\/([a-z0-9\-]+))(")/g,
+        /("url":"\/guide\/(?:(en|zh)\/)?([a-z0-9\-]+))(")/g,
         (match, prefix, _lang, slug, quote) => {
           // Skip if already has trailing slash or is a file path (has dot)
           if (slug.endsWith('/')) return match;
@@ -349,9 +353,9 @@ function fixTrailingSlashes() {
       // The actual URL is already fixed above.
 
       // Fix rendered <a href="/guide/en/intro-en"> → <a href="/guide/en/intro-en/">
-      // Match: href="/guide/en/...<slug>" (no trailing slash, not already ending with /, not an asset)
+      // Also handles the root book's "/guide/intro" → "/guide/intro/".
       content = content.replace(
-        /(href="\/guide\/(en|zh)\/([a-z0-9\-]+))(")/g,
+        /(href="\/guide\/(?:(en|zh)\/)?([a-z0-9\-]+))(")/g,
         (match, prefix, _lang, slug, quote) => {
           // Skip if already has trailing slash, has file extension, or is a root path
           if (slug.endsWith('/') || slug.indexOf('.') !== -1) return match;
@@ -380,8 +384,7 @@ function fixTrailingSlashes() {
   }
 
   console.log('  ~ Adding trailing slashes to Guide links...');
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'en'));
-  walkDir(path.join(SITE_PUBLIC_GUIDE, 'zh'));
+  walkDir(SITE_PUBLIC_GUIDE);
   console.log('  ✓ Trailing slashes fixed');
 }
 
@@ -434,13 +437,17 @@ function merge() {
     console.log('  ✓ Source images (guide/images/)');
   }
 
-  // 6. Copy favicon
+  // 6. Copy favicon (to guide root for MyST pages AND to site/public root
+  //    for the Next.js app shell — Next requests /favicon.ico at the base path)
   const srcFavicon = path.join(GUIDE_DIR, 'favicon.ico');
   const destFavicon = path.join(SITE_PUBLIC_GUIDE, 'favicon.ico');
+  const appFavicon = path.join(__dirname, '..', 'site', 'public', 'favicon.ico');
   if (fs.existsSync(srcFavicon)) {
     fs.mkdirSync(path.dirname(destFavicon), { recursive: true });
     fs.copyFileSync(srcFavicon, destFavicon);
-    console.log('  ✓ Favicon');
+    fs.mkdirSync(path.dirname(appFavicon), { recursive: true });
+    fs.copyFileSync(srcFavicon, appFavicon);
+    console.log('  ✓ Favicon (guide + app root)');
   }
 
   // 7. Copy design-tokens.css into language dirs and guide root
@@ -508,8 +515,15 @@ function merge() {
   //     and rendered <a> tags to include trailing slashes.
   fixTrailingSlashes();
 
-  // 14. Inject floating control panel (language switcher + reserved slots)
+  // 14. Prepend the /OpenScience base path to all Guide links/assets in the
+  //     MyST HTML. Required because GitHub Pages serves under /OpenScience/
+  //     and basePath (next.config) doesn't touch files copied from public/.
+  //     Gated by ADD_BASE_PATH (set only in deploy.yml, not local dev).
+  addBasePath();
+
+  // 15. Inject floating control panel (language switcher + reserved slots)
   //     Injected via <script> after hydration to avoid Remix hydration errors.
+  //     Its links are BASE-aware (see panelHtml) so they work under /OpenScience/.
   injectFloatPanel();
 
   console.log('✓ Merge complete.');
@@ -549,13 +563,13 @@ function fixRemixContextUrls() {
         return `"url":"${langPrefix}/${slug}"`;
       });
 
-      // Fix sidebar project title link: /guide/en/ → / (Next.js homepage)
-      // Actual HTML: <a title="..." class="..." href="/guide/en/">Open Science - Guide (EN)
+      // Fix sidebar project title link: /guide/en/ → homepage (Next.js app root)
+      // At deploy time BASE='/OpenScience' so it points to the app, not github.io root.
       const lang = relPath.startsWith('zh') ? 'zh' : 'en';
       // Fix rendered HTML link (class before href)
       content = content.replace(
         new RegExp(`<a title="Open Science - Guide \\(${lang === 'zh' ? 'ZH' : 'EN'}\\)" class="block break-words[^"]*font-bold" href="/guide/${lang}/">Open Science - Guide \\(${lang === 'zh' ? 'ZH' : 'EN'}\\)`, 'g'),
-        `<a title="Open Science" class="block break-words focus:outline outline-blue-200 outline-2 rounded myst-toc-item p-2 my-1 rounded-lg hover:bg-slate-300/30 font-bold" href="/">Open Science`
+        `<a title="Open Science" class="block break-words focus:outline outline-blue-200 outline-2 rounded myst-toc-item p-2 my-1 rounded-lg hover:bg-slate-300/30 font-bold" href="${BASE}/">Open Science`
       );
       // Fix __remixContext project title (prevents Remix re-render of old link)
       content = content.replace(/"title":"Open Science - Guide \(EN\)"/g, '"title":"Open Science"');
@@ -585,6 +599,84 @@ function fixRemixContextUrls() {
   walkDir(path.join(SITE_PUBLIC_GUIDE, 'en'));
   walkDir(path.join(SITE_PUBLIC_GUIDE, 'zh'));
   console.log('  ✓ Remix context URLs fixed');
+}
+
+/**
+ * Prepend the GitHub Pages base path (/OpenScience) to every Guide link/asset
+ * inside the MyST HTML. basePath in next.config.ts only rewrites Next-rendered
+ * output (_next assets, <Link>), NOT the static files copied from public/.
+ * So the MyST pages — which live under public/guide/ — must be prefixed here.
+ *
+ * Only runs when ADD_BASE_PATH=1 (set in deploy.yml). In local dev the site is
+ * served at the root, so we leave paths untouched.
+ *
+ * We replace root-absolute "/guide/" with "/OpenScience/guide/". A negative
+ * lookbehind guards against double-prefixing if the content already carries
+ * the OpenScience prefix (idempotent + safe across re-runs).
+ */
+function addBasePath() {
+  if (!process.env.ADD_BASE_PATH) return;
+  const PREFIX = BASE + '/guide/';
+
+  function processFile(filePath) {
+    try {
+      let content = fs.readFileSync(filePath, 'utf-8');
+      if (content.indexOf('__remixContext') === -1) return; // Not a MyST page
+
+      const relPath = path.relative(SITE_PUBLIC_GUIDE, filePath);
+      const isRootBook = !relPath.startsWith('en/') && !relPath.startsWith('zh/');
+
+      if (isRootBook) {
+        // Root book pages (built by guide/myst.yml with a site-root BASE_URL)
+        // are merged under public/guide/ but their HTML references bare root
+        // paths: "/about", "/build/...", "/myst-theme.css", "/favicon.ico".
+        // Prepend /guide/ (+ trailing slash) to bare slug links so they resolve
+        // under /guide/. Asset paths with extensions are handled below.
+        content = content.replace(
+          /(["'])\/([a-z0-9\-]+(?:\/[a-z0-9\-]+)*)\1/g,
+          (m, q, slug) => {
+            if (slug.startsWith('guide/') || slug.startsWith('OpenScience') || slug === '') return m;
+            return q + '/guide/' + slug + '/' + q;
+          }
+        );
+      }
+
+      // Common: prepend base path to every /guide/ reference (idempotent —
+      // guarded against an already-prefixed /OpenScience prefix).
+      content = content.replace(/(?<!OpenScience)\/guide\//g, PREFIX);
+
+      // Common: bare shared assets that the root book references at the site
+      // root. After merge they live under public/guide/<name>, so under
+      // /OpenScience/guide/<name>. These resolve to /OpenScience/guide/build,
+      // /OpenScience/guide/myst-theme.css, etc.
+      content = content.replace(/(?<![\w/])build\//g, BASE + '/guide/build/');
+      content = content.replace(
+        /(?<![\w/])(myst-theme\.css|favicon\.ico|design-tokens\.css|robots\.txt|sitemap\.xml|objects\.inv)/g,
+        BASE + '/guide/$1'
+      );
+
+      fs.writeFileSync(filePath, content, 'utf-8');
+    } catch (e) {
+      // Skip unreadable files
+    }
+  }
+
+  function walkDir(dir) {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walkDir(fullPath);
+      } else if (entry.name.endsWith('.html')) {
+        processFile(fullPath);
+      }
+    }
+  }
+
+  console.log('  ~ Prepending /OpenScience base path to Guide links/assets...');
+  walkDir(SITE_PUBLIC_GUIDE);
+  console.log('  ✓ Base path prepended');
 }
 
 merge();

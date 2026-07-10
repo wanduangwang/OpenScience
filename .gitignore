@@ -16,6 +16,8 @@ guide/_build/
 guide/**/_build_old/
 # merged MyST build output (3900+ generated files)
 site/public/guide/
+# app-shell favicon copied from guide/ by merge-builds.js (generated)
+site/public/favicon.ico
 
 # Test coverage
 /coverage

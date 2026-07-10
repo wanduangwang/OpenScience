@@ -497,3 +497,20 @@ jobs:
 - ✅ 唯一需要的脚本改动：`fixRemixContextUrls()` 补页面链接尾斜杠 + 生成 `slug/index.html`（§2.2）。
 - ✅ rewrites 仍要删，但原因是「与 `output:'export'` 互斥」而非「404」。
 - ✅ `.nojekyll` 依旧必需——MyST 资产目录是 `_assets/`、`_shared/`（下划线前缀），Jekyll 会吞掉它们。
+
+---
+
+## 13. basePath 修复记录（2026-07-10 部署后 console 404）
+
+部署后控制台大量 404，全部是向 **根路径** `wanduangwang.github.io/_next/...`、`/favicon.ico` 请求（实际站点在 `/OpenScience/` 子路径下）。根因：GitHub Pages 项目页必须用 `basePath: '/OpenScience'`，而当时 `next.config.ts` 缺此配置，MyST 静态 HTML 与 Next 资源也未按子路径前缀化。
+
+### 根因分层
+1. **Next.js 自身资源**（`/_next/...`、`/favicon.ico`）：缺 `basePath` → 加 `basePath: '/OpenScience'`（仅 `NODE_ENV==='production'` 生效，dev 留根路径）。
+2. **MyST 静态 HTML**（在 `public/`，basePath 不改写其内链接）：`addBasePath()` 给 `/guide/` 引用补 `/OpenScience` 前缀。
+   - 实测发现存在**第三本 MyST 书** `guide/myst.yml`（BASE_URL 为空），生成无语言前缀页面 `about/`、`intro/`、`ch1-mof-basics/` 等，其引用是**裸根路径** `/build/...`、`/myst-theme.css`、`/favicon.ico`。`addBasePath()` 已扩展为遍历整棵 `public/guide/` 树，并对 root 书页面先把裸根路径补 `/guide/`、再统一补 `/OpenScience`。
+   - 注：CI 的 `deploy.yml` 当前只构建 en/zh 两本（root 书未构建、merge 也未拷贝），故部署产物不含 root 页面。root 书内部路由（`/about` vs `/guide/about`）仍有错配，属另一问题，未纳入本次修复。
+3. **Next 应用 `about` 页**：硬编码 `<img src="/guide/images/...">`（plain `<img>`，basePath 不改写）→ 改为 `${process.env.NEXT_PUBLIC_BASE_PATH}/guide/images/...`，并在 `deploy.yml` 的 build 步骤注入 `NEXT_PUBLIC_BASE_PATH: /OpenScience`。
+4. **首页 CTA 的 `<Link>`**：client component 内 `<Link>` 静态导出时渲染出**未前缀化**的 `href="/guide/en/intro-en"`（Header 的 `<Link>` 因布局预渲染正常）。改为 plain `<a>` + 显式 `basePath + href`，彻底规避 `<Link>` 双前缀/漏前缀歧义。
+
+### 验证
+本地 `ADD_BASE_PATH=1 NODE_ENV=production NEXT_PUBLIC_BASE_PATH=/OpenScience` 全链构建后，`out/` 全站扫描**无任何未前缀化的** `/_next/`、`/guide/`、`/build/`、`/myst-theme`、`/favicon` 引用；`/` `/about/` `/guide/en/` `/guide/zh/` `/guide/en/intro-en/` 及关键资源本地 serve 均 200。
