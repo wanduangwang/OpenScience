@@ -33,6 +33,7 @@ jobs:
         with:
           node-version: 22          # 匹配本地；满足 engines >=20（旧流程的 18.x 会跑挂 Next 16）
           cache: npm                # 缓存 npm 依赖，加速构建
+          cache-dependency-path: 'site/package-lock.json'   # lock 在 site/ 子目录，必须显式指定，否则 setup-node 在仓库根目录找不到
 
       - name: Install MyST
         run: npm install -g mystmd@1.10.1   # 锁版本，防 mystmd 升级漂移导致输出结构变化
